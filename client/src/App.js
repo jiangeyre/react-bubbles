@@ -6,11 +6,13 @@ import BubblePage from './components/BubblePage';
 
 import Login from "./components/Login";
 import "./styles.scss";
+import bubblez from './imgs/bubbles.png';
 
 function App() {
   return (
     <Router>
       <div className="App">
+        <img src={bubblez} alt="finding nemo bubbles yellow" style={{height: 300}} />
         <Route exact path="/" component={Login} />
         {/* 
           Build a PrivateRoute component that will 
