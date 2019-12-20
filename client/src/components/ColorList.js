@@ -11,6 +11,14 @@ const ColorList = ({ colors, updateColors }) => {
   const [editing, setEditing] = useState(false);
   const [colorToEdit, setColorToEdit] = useState(initialColor);
 
+  // stretch
+  const [newColor, setNewColor] = useState({
+    color: '',
+    code: {
+      hex: ''
+    }
+  });
+
   const editColor = color => {
     setEditing(true);
     setColorToEdit(color);
@@ -41,13 +49,30 @@ const ColorList = ({ colors, updateColors }) => {
       .catch((err) => console.log(err));
   };
 
-  const addColor = () => {
+  const handleChanges = e => {
+    setNewColor({
+      ...newColor,
+      color: e.target.value
+    })
+  };
+
+  const handleHexChanges = e => {
+    setNewColor({
+      ...newColor,
+      code: {
+        hex: e.target.value
+      }
+    })
+  };
+
+  const addColor = (e) => {
     axiosWithAuth()
-      .post('/colors')
+      .post('/colors', newColor)
       .then(res => {
-        console.log(res);
+        updateColors([...colors, newColor])
       })
       .catch(err => console.log(err));
+    e.preventDefault();
   };
 
   return (
@@ -59,7 +84,7 @@ const ColorList = ({ colors, updateColors }) => {
             <span>
               <span className="delete" onClick={e => {
                     e.stopPropagation();
-                    deleteColor(color)
+                    deleteColor(color, e)
                   }
                 }>
                   x
@@ -103,8 +128,24 @@ const ColorList = ({ colors, updateColors }) => {
           </div>
         </form>
       )}
-      <div className="spacer" />
+      <div className="spacer" style={{marginTop: -425}}/>
       {/* stretch - build another form here to add a color */}
+        <h1>Add a New Color!</h1>
+        <form onSubmit={addColor}>
+          <input 
+            name="color" 
+            value={newColor.color}
+            onChange={handleChanges}
+            placeholder='New color.'
+          />
+          <input 
+            name="color" 
+            value={newColor.code.hex}
+            onChange={handleHexChanges}
+            placeholder='Hex#'
+          />
+          <button>Add!</button>
+        </form>
     </div>
   );
 };
