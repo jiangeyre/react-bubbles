@@ -1,0 +1,35 @@
+Client Side Authentication:
+
+Modern web services dealing with JSON data use Jason Web Tokens (JWTs) instead. These tokens, when issues by the server, are strings of cryptic text, which can be stored on the client-side using local storage or session storage. Then the token can be read and decisions of data transfer are made based on the client's permission.
+
+Taking in a payload of a username and password
+
+After the user properly authenticates (properly logs in), the server returns the token. Your application needs to save the returned token (the permissions) to localStorage, so that the above axiosWithAuth module can grab it for other calls that require the Authorization header.
+
+render props pattern:
+technique for sharing code between React components using a prop whose value is a function
+
+A component with a render prop takes a function that returns a React element and calls it instead of implementing its own render logic.
+
+A render prop is a function prop that a component uses to know what to render.
+
+It's important to remember that just because the pattern is called 'render props' you don't have to use a prop named render to use this pattern. Any prop that is a function that a component uses to know what to render is technically a 'render prop'.
+
+
+HTTP / AJAX
+
+CRUD: create, read, update, delete
+
+When building APIs, we want our models to provide four basic types of functionality. The model must be able to CREATE, READ, UPDATE, and DELETE resources. This provides a memorable framework for reminding developers of how to construct full, usable models.
+
+CRUD and REST 
+
+HTTP methods of POST, GET, PUT, DELETE
+
+create: http post method (post creates a new resource of the specified resource type)
+
+read: get (only retrieve, not alter)
+
+update: put
+
+delete: delete (remove resource from the system)
